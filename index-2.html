@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Toolshed — Seven Quick Calculators &amp; Converters</title>
+<meta name="description" content="Free, fast, no-signup calculators: tip, percentage, BMI, unit converter, age, word count, and password generator." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   TOOLSHED — blueprint / drafting-table theme
+   ============================================================ */
+
+:root {
+  --navy-deep: #0b1626;
+  --navy: #12233b;
+  --navy-panel: #16294450;
+  --grid-line: rgba(94, 149, 184, 0.16);
+  --grid-line-strong: rgba(94, 149, 184, 0.32);
+  --paper: #ede6d6;
+  --paper-dim: #b9c3d1;
+  --text-dim: #8fa2b8;
+  --brass: #c9a24b;
+  --brass-soft: rgba(201, 162, 75, 0.16);
+  --rust: #c1502e;
+  --line: rgba(237, 230, 214, 0.14);
+  --radius: 2px;
+
+  --font-display: "Space Grotesk", "Arial Narrow", sans-serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background-color: var(--navy-deep);
+  background-image: radial-gradient(circle at 20% 0%, #16294a 0%, var(--navy-deep) 55%);
+  color: var(--paper);
+  font-family: var(--font-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--brass); }
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 2px;
+}
+
+.wrap {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- header ---------- */
+
+header.site {
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--navy-deep), transparent);
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--paper);
+}
+
+.brand .mark {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--brass);
+  border: 1px solid var(--brass);
+  padding: 2px 6px;
+  border-radius: var(--radius);
+  letter-spacing: 0.08em;
+}
+
+.brand .name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+}
+
+.site-nav nav {
+  display: flex;
+  gap: 22px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.site-nav nav a {
+  text-decoration: none;
+  color: var(--paper-dim);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+}
+
+.site-nav nav a:hover { color: var(--brass); border-color: var(--brass); }
+
+/* ---------- hero ---------- */
+
+.hero {
+  padding: 64px 0 48px;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  color: var(--brass);
+  text-transform: uppercase;
+  margin: 0 0 14px;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 6vw, 60px);
+  line-height: 0.98;
+  margin: 0 0 18px;
+  letter-spacing: -0.01em;
+}
+
+.hero p.lede {
+  color: var(--paper-dim);
+  font-size: 17px;
+  max-width: 46ch;
+  margin: 0 0 26px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  color: var(--navy-deep);
+  background: var(--brass);
+  padding: 12px 18px;
+  border-radius: var(--radius);
+  border: 1px solid var(--brass);
+  cursor: pointer;
+}
+
+.btn:hover { background: #dcb562; }
+
+.btn.ghost {
+  background: transparent;
+  color: var(--paper);
+  border-color: var(--line);
+}
+.btn.ghost:hover { border-color: var(--brass); color: var(--brass); }
+
+/* ---------- gauge (signature element) ---------- */
+
+.gauge-wrap { display: flex; justify-content: center; }
+
+.gauge {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+}
+
+.gauge .dial-face { fill: var(--navy); stroke: var(--line); stroke-width: 1; }
+.gauge .tick { stroke: var(--paper-dim); stroke-width: 1.5; }
+.gauge .tick.major { stroke: var(--brass); stroke-width: 2; }
+.gauge .needle {
+  stroke: var(--rust);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  transform-origin: 100px 100px;
+  transform: rotate(-120deg);
+  animation: sweep 1.8s cubic-bezier(.2,.9,.25,1) 0.2s both;
+}
+.gauge .hub { fill: var(--brass); }
+.gauge .label {
+  font-family: var(--font-mono);
+  fill: var(--text-dim);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+}
+
+@keyframes sweep {
+  0%   { transform: rotate(-120deg); }
+  60%  { transform: rotate(48deg); }
+  100% { transform: rotate(28deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gauge .needle { animation: none; transform: rotate(28deg); }
+  html { scroll-behavior: auto; }
+}
+
+/* ---------- figure grid (tool index cards) ---------- */
+
+.fig-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 14px;
+  padding: 8px 0 56px;
+}
+
+.fig-card {
+  display: block;
+  text-decoration: none;
+  color: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 16px 18px;
+  background: var(--navy-panel);
+  transition: border-color .15s ease, transform .15s ease;
+}
+.fig-card:hover { border-color: var(--brass); transform: translateY(-2px); }
+
+.fig-card .fig-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--brass);
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.fig-card .fig-title {
+  font-family: var(--font-display);
+  font-size: 17px;
+  margin: 0 0 6px;
+}
+
+.fig-card .fig-desc {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+/* ---------- ad slots ---------- */
+
+.ad-slot {
+  margin: 40px 0;
+  padding: 18px;
+  border: 1px dashed var(--grid-line-strong);
+  border-radius: var(--radius);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- instrument panels (tool sections) ---------- */
+
+.panel {
+  position: relative;
+  border: 1px solid var(--line);
+  background: var(--navy-panel);
+  border-radius: var(--radius);
+  padding: 30px 28px 28px;
+  margin: 22px 0 40px;
+  scroll-margin-top: 24px;
+}
+
+.panel::before,
+.panel::after,
+.panel .corner-tl,
+.panel .corner-br {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: var(--brass);
+  border-style: solid;
+  opacity: 0.8;
+}
+.panel::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+.panel::after { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+.panel .panel-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+
+.panel .fig-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--brass);
+  letter-spacing: 0.1em;
+}
+
+.panel h2 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  margin: 4px 0 0;
+}
+
+.panel .panel-note {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin: 6px 0 0;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.field label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.field input[type="text"],
+.field input[type="number"],
+.field input[type="date"],
+.field select,
+.field textarea {
+  width: 100%;
+  background: var(--navy-deep);
+  border: 1px solid var(--line);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: 15px;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+}
+
+.field textarea { resize: vertical; min-height: 120px; font-family: var(--font-body); }
+
+.field.checks { display: flex; align-items: center; gap: 8px; }
+.field.checks label { margin: 0; text-transform: none; font-family: var(--font-body); font-size: 14px; color: var(--paper); }
+
+.readout {
+  margin-top: 6px;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+}
+
+.readout .value {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  color: var(--brass);
+  line-height: 1.1;
+}
+
+.readout .value.small { font-size: 18px; color: var(--paper); }
+
+.readout .value-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  display: block;
+  margin-top: 4px;
+}
+
+.password-out {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background: var(--navy-deep);
+  border: 1px solid var(--line);
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 16px;
+  color: var(--brass);
+  word-break: break-all;
+}
+
+.password-out button {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  background: transparent;
+  border: 1px solid var(--brass);
+  color: var(--brass);
+  padding: 6px 10px;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.password-out button:hover { background: var(--brass-soft); }
+
+.range-row { display: flex; align-items: center; gap: 12px; }
+.range-row output {
+  font-family: var(--font-mono);
+  color: var(--brass);
+  min-width: 2ch;
+}
+
+/* ---------- static pages (about / privacy) ---------- */
+
+.prose { padding: 48px 0 64px; max-width: 68ch; }
+.prose h1 {
+  font-family: var(--font-display);
+  font-size: 38px;
+  margin-bottom: 6px;
+}
+.prose .eyebrow { margin-bottom: 10px; }
+.prose h2 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  margin-top: 32px;
+}
+.prose p, .prose li { color: var(--paper-dim); font-size: 15px; }
+.prose a { color: var(--brass); }
+
+/* ---------- footer ---------- */
+
+footer.site {
+  border-top: 1px solid var(--line);
+  padding: 28px 0 40px;
+  margin-top: 20px;
+}
+footer.site .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-dim);
+}
+footer.site a { color: var(--text-dim); text-decoration: none; margin-left: 16px; }
+footer.site a:hover { color: var(--brass); }
+
+@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; padding-top: 40px; }
+  .gauge-wrap { order: -1; max-width: 200px; margin: 0 auto; }
+}
+
+</style>
+
+<!-- Google AdSense — site verification / Auto ads (publisher: pub-5608794111081395) -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5608794111081395" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap site-nav">
+    <a href="index.html" class="brand">
+      <span class="mark">TS</span>
+      <span class="name">Toolshed</span>
+    </a>
+    <nav>
+      <a href="#tools">Tools</a>
+      <a href="#about">About</a>
+      <a href="#privacy">Privacy</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Seven instruments, one bench</p>
+        <h1>Measure it.<br>Convert it.<br>Move on.</h1>
+        <p class="lede">Plain calculators for the math you actually run into during the day — no account, no app store, no clutter. Pick a tool below.</p>
+        <a href="#tools" class="btn">Open the toolbox ↓</a>
+      </div>
+      <div class="gauge-wrap">
+        <svg class="gauge" viewBox="0 0 200 140" role="img" aria-label="Decorative measurement gauge">
+          <path class="dial-face" d="M20,120 A80,80 0 0,1 180,120 Z" />
+          <g class="ticks">
+            <line class="tick major" x1="100" y1="42" x2="100" y2="52" transform="rotate(-90 100 120)"/>
+            <line class="tick major" x1="100" y1="42" x2="100" y2="52" transform="rotate(-45 100 120)"/>
+            <line class="tick major" x1="100" y1="42" x2="100" y2="52" transform="rotate(0 100 120)"/>
+            <line class="tick major" x1="100" y1="42" x2="100" y2="52" transform="rotate(45 100 120)"/>
+            <line class="tick major" x1="100" y1="42" x2="100" y2="52" transform="rotate(90 100 120)"/>
+            <line class="tick" x1="100" y1="42" x2="100" y2="49" transform="rotate(-67.5 100 120)"/>
+            <line class="tick" x1="100" y1="42" x2="100" y2="49" transform="rotate(-22.5 100 120)"/>
+            <line class="tick" x1="100" y1="42" x2="100" y2="49" transform="rotate(22.5 100 120)"/>
+            <line class="tick" x1="100" y1="42" x2="100" y2="49" transform="rotate(67.5 100 120)"/>
+          </g>
+          <line class="needle" x1="100" y1="120" x2="100" y2="55" />
+          <circle class="hub" cx="100" cy="120" r="5" />
+          <text class="label" x="100" y="132" text-anchor="middle">UNITS / TIME / MASS</text>
+        </svg>
+      </div>
+    </section>
+
+    <div class="ad-slot" aria-hidden="true">
+      AD SLOT — TOP BANNER
+      <!-- Replace this div with your <ins class="adsbygoogle"> ad unit -->
+    </div>
+
+    <section id="tools">
+      <p class="eyebrow" style="margin-top:8px;">Fig. 1–7 — the bench</p>
+      <div class="fig-grid">
+        <a class="fig-card" href="#tip">
+          <span class="fig-num">FIG. 1</span>
+          <h3 class="fig-title">Tip Calculator</h3>
+          <p class="fig-desc">Split a bill and tip by any percentage.</p>
+        </a>
+        <a class="fig-card" href="#percent">
+          <span class="fig-num">FIG. 2</span>
+          <h3 class="fig-title">Percentage Calculator</h3>
+          <p class="fig-desc">X% of Y, or the change between two numbers.</p>
+        </a>
+        <a class="fig-card" href="#bmi">
+          <span class="fig-num">FIG. 3</span>
+          <h3 class="fig-title">BMI Calculator</h3>
+          <p class="fig-desc">Metric or imperial, with the standard ranges.</p>
+        </a>
+        <a class="fig-card" href="#convert">
+          <span class="fig-num">FIG. 4</span>
+          <h3 class="fig-title">Unit Converter</h3>
+          <p class="fig-desc">Length, weight, and temperature.</p>
+        </a>
+        <a class="fig-card" href="#age">
+          <span class="fig-num">FIG. 5</span>
+          <h3 class="fig-title">Age Calculator</h3>
+          <p class="fig-desc">Exact age in years, months, days.</p>
+        </a>
+        <a class="fig-card" href="#words">
+          <span class="fig-num">FIG. 6</span>
+          <h3 class="fig-title">Word &amp; Character Counter</h3>
+          <p class="fig-desc">Live counts plus an estimated reading time.</p>
+        </a>
+        <a class="fig-card" href="#password">
+          <span class="fig-num">FIG. 7</span>
+          <h3 class="fig-title">Password Generator</h3>
+          <p class="fig-desc">Random passwords, generated in your browser.</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============ FIG 1 — TIP ============ -->
+    <section class="panel" id="tip">
+      <div class="panel-head">
+        <div>
+          <span class="fig-num">FIG. 1</span>
+          <h2>Tip Calculator</h2>
+        </div>
+      </div>
+      <div class="field-grid">
+        <div class="field">
+          <label for="tip-bill">Bill amount ($)</label>
+          <input type="number" id="tip-bill" value="50" min="0" step="0.01" oninput="calcTip()">
+        </div>
+        <div class="field">
+          <label for="tip-pct">Tip (%)</label>
+          <input type="number" id="tip-pct" value="18" min="0" step="1" oninput="calcTip()">
+        </div>
+        <div class="field">
+          <label for="tip-people">Split between</label>
+          <input type="number" id="tip-people" value="1" min="1" step="1" oninput="calcTip()">
+        </div>
+      </div>
+      <div class="readout">
+        <div><span class="value" id="tip-amount">$0.00</span><span class="value-label">Tip amount</span></div>
+        <div><span class="value" id="tip-total">$0.00</span><span class="value-label">Total bill</span></div>
+        <div><span class="value" id="tip-per-person">$0.00</span><span class="value-label">Per person</span></div>
+      </div>
+    </section>
+
+    <!-- ============ FIG 2 — PERCENTAGE ============ -->
+    <section class="panel" id="percent">
+      <div class="panel-head">
+        <div>
+          <span class="fig-num">FIG. 2</span>
+          <h2>Percentage Calculator</h2>
+        </div>
+      </div>
+      <p class="panel-note">What is X% of Y?</p>
+      <div class="field-grid">
+        <div class="field">
+          <label for="pct-x">X (percent)</label>
+          <input type="number" id="pct-x" value="15" oninput="calcPercentOf()">
+        </div>
+        <div class="field">
+          <label for="pct-y">Y (of this number)</label>
+          <input type="number" id="pct-y" value="200" oninput="calcPercentOf()">
+        </div>
+      </div>
+      <div class="readout" style="margin-bottom:26px;">
+        <div><span class="value" id="pct-of-result">0</span><span class="value-label">Result</span></div>
+      </div>
+
+      <p class="panel-note">Percentage change from one number to another</p>
+      <div class="field-grid">
+        <div class="field">
+          <label for="pct-from">From</label>
+          <input type="number" id="pct-from" value="80" oninput="calcPercentChange()">
+        </div>
+        <div class="field">
+          <label for="pct-to">To</label>
+          <input type="number" id="pct-to" value="100" oninput="calcPercentChange()">
+        </div>
+      </div>
+      <div class="readout">
+        <div><span class="value" id="pct-change-result">0%</span><span class="value-label">Change</span></div>
+      </div>
+    </section>
+
+    <!-- ============ FIG 3 — BMI ============ -->
+    <section class="panel" id="bmi">
+      <div class="panel-head">
+        <div>
+          <span class="fig-num">FIG. 3</span>
+          <h2>BMI Calculator</h2>
+        </div>
+      </div>
+      <div class="field-grid">
+        <div class="field">
+          <label for="bmi-unit">Units</label>
+          <select id="bmi-unit" onchange="toggleBmiUnit()">
+            <option value="metric">Metric (kg / cm)</option>
+            <option value="imperial">Imperial (lb / in)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="bmi-weight" id="bmi-weight-label">Weight (kg)</label>
+          <input type="number" id="bmi-weight" value="70" min="0" oninput="calcBmi()">
+        </div>
+        <div class="field">
+          <label for="bmi-height" id="bmi-height-label">Height (cm)</label>
+          <input type="number" id="bmi-height" value="175" min="0" oninput="calcBmi()">
+        </div>
+      </div>
+      <div class="readout">
+        <div><span class="value" id="bmi-result">—</span><span class="value-label">BMI</span></div>
+        <div><span class="value small" id="bmi-category">—</span><span class="value-label">Category</span></div>
+      </div>
+      <p class="panel-note" style="margin-top:18px;">BMI is a rough screening measure, not a diagnosis — it doesn't account for muscle mass, frame, age, or sex.</p>
+    </section>
+
+    <div class="ad-slot" aria-hidden="true">
+      AD SLOT — IN-CONTENT
+      <!-- Replace this div with your <ins class="adsbygoogle"> ad unit -->
+    </div>
+
+    <!-- ============ FIG 4 — UNIT CONVERTER ============ -->
+    <section class="panel" id="convert">
+      <div class="panel-head">
+        <div>
+          <span class="fig-num">FIG. 4</span>
+          <h2>Unit Converter</h2>
+        </div>
+      </div>
+      <div class="field-grid">
+        <div class="field">
+          <label for="conv-category">Category</label>
+          <select id="conv-category" onchange="populateUnitOptions()">
+            <option value="length">Length</option>
+            <option value="weight">Weight</option>
+            <option value="temperature">Temperature</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="conv-value">Value</label>
+          <input type="number" id="conv-value" value="1" oninput="calcConvert()">
+        </div>
+        <div class="field">
+          <label for="conv-from">From</label>
+          <select id="conv-from" onchange="calcConvert()"></select>
+        </div>
+        <div class="field">
+          <label for="conv-to">To</label>
+          <select id="conv-to" onchange="calcConvert()"></select>
+        </div>
+      </div>
+      <div class="readout">
+        <div><span class="value" id="conv-result">0</span><span class="value-label">Converted value</span></div>
+      </div>
+    </section>
+
+    <!-- ============ FIG 5 — AGE ============ -->
+    <section class="panel" id="age">
+      <div class="panel-head">
+        <div>
+          <span class="fig-num">FIG. 5</span>
+          <h2>Age Calculator</h2>
+        </div>
+      </div>
+      <div class="field-grid">
+        <div class="field">
+          <label for="age-dob">Date of birth</label>
+          <input type="date" id="age-dob" oninput="calcAge()">
+        </div>
+      </div>
+      <div class="readout">
+        <div><span class="value" id="age-result">—</span><span class="value-label">Current age</span></div>
+        <div><span class="value small" id="age-days">—</span><span class="value-label">Total days lived</span></div>
+      </div>
+    </section>
+
+    <!-- ============ FIG 6 — WORD COUNT ============ -->
+    <section class="panel" id="words">
+      <div class="panel-head">
+        <div>
+          <span class="fig-num">FIG. 6</span>
+          <h2>Word &amp; Character Counter</h2>
+        </div>
+      </div>
+      <div class="field">
+        <label for="wc-input">Paste or type text</label>
+        <textarea id="wc-input" oninput="calcWordCount()" placeholder="Start typing…"></textarea>
+      </div>
+      <div class="readout">
+        <div><span class="value small" id="wc-words">0</span><span class="value-label">Words</span></div>
+        <div><span class="value small" id="wc-chars">0</span><span class="value-label">Characters</span></div>
+        <div><span class="value small" id="wc-chars-ns">0</span><span class="value-label">Chars (no spaces)</span></div>
+        <div><span class="value small" id="wc-sentences">0</span><span class="value-label">Sentences</span></div>
+        <div><span class="value small" id="wc-reading">—</span><span class="value-label">Reading time</span></div>
+      </div>
+    </section>
+
+    <!-- ============ FIG 7 — PASSWORD ============ -->
+    <section class="panel" id="password">
+      <div class="panel-head">
+        <div>
+          <span class="fig-num">FIG. 7</span>
+          <h2>Password Generator</h2>
+        </div>
+      </div>
+      <div class="field" style="margin-bottom:18px;">
+        <label for="pw-length">Length: <output id="pw-length-value">16</output></label>
+        <div class="range-row">
+          <input type="range" id="pw-length" min="6" max="48" value="16" oninput="updatePwLengthLabel()" style="width:100%;">
+        </div>
+      </div>
+      <div class="field-grid" style="margin-bottom:20px;">
+        <div class="field checks">
+          <input type="checkbox" id="pw-upper" checked onchange="genPassword()">
+          <label for="pw-upper">Uppercase (A-Z)</label>
+        </div>
+        <div class="field checks">
+          <input type="checkbox" id="pw-lower" checked onchange="genPassword()">
+          <label for="pw-lower">Lowercase (a-z)</label>
+        </div>
+        <div class="field checks">
+          <input type="checkbox" id="pw-numbers" checked onchange="genPassword()">
+          <label for="pw-numbers">Numbers (0-9)</label>
+        </div>
+        <div class="field checks">
+          <input type="checkbox" id="pw-symbols" onchange="genPassword()">
+          <label for="pw-symbols">Symbols (!@#…)</label>
+        </div>
+      </div>
+      <div class="password-out">
+        <span id="pw-output" style="flex:1;">—</span>
+        <button id="pw-copy-btn" type="button" onclick="copyPassword()">Copy</button>
+        <button type="button" onclick="genPassword()">↻ New</button>
+      </div>
+      <p class="panel-note" style="margin-top:14px;">Generated locally in your browser using the Web Crypto API — nothing is sent anywhere or stored.</p>
+    </section>
+
+    <div class="ad-slot" aria-hidden="true">
+      AD SLOT — BOTTOM
+      <!-- Replace this div with your <ins class="adsbygoogle"> ad unit -->
+    </div>
+
+
+    <section class="prose" id="about" style="scroll-margin-top:24px; border-top:1px solid var(--line); padding-top:48px;">
+<p class="eyebrow">About</p>
+    <h1>A small, honest toolbox</h1>
+
+    <p>Toolshed is seven single-purpose calculators — a tip splitter, a percentage calculator, a BMI check, a unit converter, an age calculator, a word counter, and a password generator. That's it. No account, no app to install, nothing saved on a server.</p>
+
+    <p>Every calculation runs in your browser with plain JavaScript. Nothing you type is sent anywhere.</p>
+
+    <h2>Why it looks like a blueprint</h2>
+    <p>Because these are measuring instruments, not a lifestyle brand. The grid, the figure numbers, and the gauge in the header are meant to feel like a page out of a drafting notebook — a place for numbers to be exact, not decorated.</p>
+
+    <h2>Feedback</h2>
+    <p>[Add a contact email or form here once you're ready to publish.]</p>
+    </section>
+
+    <section class="prose" id="privacy" style="scroll-margin-top:24px; border-top:1px solid var(--line); padding-top:48px;">
+<p class="eyebrow">Legal</p>
+    <h1>Privacy Policy</h1>
+    <p><em>This is a starting template — read it, edit the bracketed parts, and replace this notice before you publish. It is not legal advice.</em></p>
+    <p>Last updated: [date]</p>
+
+    <h2>What this site collects</h2>
+    <p>The calculators on Toolshed run entirely in your browser. Nothing you type into a calculator (bill amounts, dates of birth, text you paste into the word counter, etc.) is sent to a server or stored by this site.</p>
+
+    <h2>Cookies and advertising</h2>
+    <p>This site may show ads served by Google AdSense. Google and its partners may use cookies or similar technologies to serve ads based on your prior visits to this or other websites. You can opt out of personalized advertising by visiting <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google Ads Settings</a>.</p>
+    <p>Third-party vendors, including Google, use cookies to serve ads based on someone's prior visits to this website or other websites. Google's use of advertising cookies enables it and its partners to serve ads based on your visit to this site and/or other sites on the Internet.</p>
+
+    <h2>Analytics</h2>
+    <p>[If you add Google Analytics or another analytics tool, describe what it collects here — typically anonymized traffic and usage data.]</p>
+
+    <h2>Third-party links</h2>
+    <p>This site does not knowingly collect personal information from children. If you believe a child has provided personal information, contact us using the details below and it will be removed.</p>
+
+    <h2>Contact</h2>
+    <p>[Add a contact email here.]</p>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© <span id="year"></span> Toolshed. All calculations run locally in your browser.</span>
+    <span>
+      <a href="#about">About</a>
+      <a href="#privacy">Privacy</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+"use strict";
+
+/* ---------- 1. Tip calculator ---------- */
+function calcTip() {
+  const bill = parseFloat(document.getElementById("tip-bill").value) || 0;
+  const pct = parseFloat(document.getElementById("tip-pct").value) || 0;
+  const people = Math.max(1, parseInt(document.getElementById("tip-people").value) || 1);
+
+  const tip = bill * (pct / 100);
+  const total = bill + tip;
+
+  document.getElementById("tip-amount").textContent = "$" + tip.toFixed(2);
+  document.getElementById("tip-total").textContent = "$" + total.toFixed(2);
+  document.getElementById("tip-per-person").textContent = "$" + (total / people).toFixed(2);
+}
+
+/* ---------- 2. Percentage calculator ---------- */
+function calcPercentOf() {
+  const x = parseFloat(document.getElementById("pct-x").value) || 0;
+  const y = parseFloat(document.getElementById("pct-y").value) || 0;
+  document.getElementById("pct-of-result").textContent = ((x / 100) * y).toFixed(2);
+}
+
+function calcPercentChange() {
+  const from = parseFloat(document.getElementById("pct-from").value) || 0;
+  const to = parseFloat(document.getElementById("pct-to").value) || 0;
+  const el = document.getElementById("pct-change-result");
+  if (from === 0) {
+    el.textContent = "—";
+    return;
+  }
+  const change = ((to - from) / Math.abs(from)) * 100;
+  el.textContent = (change > 0 ? "+" : "") + change.toFixed(2) + "%";
+}
+
+/* ---------- 3. BMI calculator ---------- */
+function calcBmi() {
+  const unit = document.getElementById("bmi-unit").value;
+  const weight = parseFloat(document.getElementById("bmi-weight").value) || 0;
+  const height = parseFloat(document.getElementById("bmi-height").value) || 0;
+
+  let bmi = 0;
+  if (unit === "metric") {
+    const hMeters = height / 100;
+    bmi = hMeters > 0 ? weight / (hMeters * hMeters) : 0;
+  } else {
+    bmi = height > 0 ? (weight / (height * height)) * 703 : 0;
+  }
+
+  document.getElementById("bmi-result").textContent = bmi ? bmi.toFixed(1) : "—";
+
+  let category = "—";
+  if (bmi > 0) {
+    if (bmi < 18.5) category = "Underweight";
+    else if (bmi < 25) category = "Healthy range";
+    else if (bmi < 30) category = "Overweight";
+    else category = "Obese";
+  }
+  document.getElementById("bmi-category").textContent = category;
+}
+
+function toggleBmiUnit() {
+  const unit = document.getElementById("bmi-unit").value;
+  document.getElementById("bmi-weight-label").textContent = unit === "metric" ? "Weight (kg)" : "Weight (lb)";
+  document.getElementById("bmi-height-label").textContent = unit === "metric" ? "Height (cm)" : "Height (in)";
+  calcBmi();
+}
+
+/* ---------- 4. Unit converter ---------- */
+const UNIT_TABLES = {
+  length: {
+    base: "m",
+    units: { mm: 0.001, cm: 0.01, m: 1, km: 1000, in: 0.0254, ft: 0.3048, yd: 0.9144, mi: 1609.344 },
+  },
+  weight: {
+    base: "kg",
+    units: { mg: 0.000001, g: 0.001, kg: 1, lb: 0.45359237, oz: 0.028349523, st: 6.35029 },
+  },
+  temperature: { special: true },
+};
+
+function populateUnitOptions() {
+  const category = document.getElementById("conv-category").value;
+  const fromSel = document.getElementById("conv-from");
+  const toSel = document.getElementById("conv-to");
+  fromSel.innerHTML = "";
+  toSel.innerHTML = "";
+
+  const keys = category === "temperature" ? ["C", "F", "K"] : Object.keys(UNIT_TABLES[category].units);
+
+  keys.forEach((k) => {
+    fromSel.appendChild(new Option(k, k));
+    toSel.appendChild(new Option(k, k));
+  });
+  if (keys.length > 1) toSel.selectedIndex = 1;
+  calcConvert();
+}
+
+function convertTemperature(value, from, to) {
+  let celsius;
+  if (from === "C") celsius = value;
+  else if (from === "F") celsius = (value - 32) * (5 / 9);
+  else celsius = value - 273.15;
+
+  if (to === "C") return celsius;
+  if (to === "F") return celsius * (9 / 5) + 32;
+  return celsius + 273.15;
+}
+
+function calcConvert() {
+  const category = document.getElementById("conv-category").value;
+  const value = parseFloat(document.getElementById("conv-value").value) || 0;
+  const from = document.getElementById("conv-from").value;
+  const to = document.getElementById("conv-to").value;
+  const out = document.getElementById("conv-result");
+
+  let result;
+  if (category === "temperature") {
+    result = convertTemperature(value, from, to);
+  } else {
+    const table = UNIT_TABLES[category].units;
+    const inBase = value * table[from];
+    result = inBase / table[to];
+  }
+  out.textContent = (Math.round(result * 10000) / 10000).toString();
+}
+
+/* ---------- 5. Age calculator ---------- */
+function calcAge() {
+  const input = document.getElementById("age-dob").value;
+  const out = document.getElementById("age-result");
+  const daysOut = document.getElementById("age-days");
+  if (!input) {
+    out.textContent = "—";
+    daysOut.textContent = "—";
+    return;
+  }
+  const dob = new Date(input + "T00:00:00");
+  const now = new Date();
+  if (dob > now) {
+    out.textContent = "Pick a past date";
+    daysOut.textContent = "—";
+    return;
+  }
+
+  let years = now.getFullYear() - dob.getFullYear();
+  let months = now.getMonth() - dob.getMonth();
+  let days = now.getDate() - dob.getDate();
+
+  if (days < 0) {
+    months -= 1;
+    const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+    days += prevMonth.getDate();
+  }
+  if (months < 0) {
+    years -= 1;
+    months += 12;
+  }
+
+  out.textContent = `${years}y ${months}m ${days}d`;
+  const totalDays = Math.floor((now - dob) / (1000 * 60 * 60 * 24));
+  daysOut.textContent = totalDays.toLocaleString();
+}
+
+/* ---------- 6. Word / character counter ---------- */
+function calcWordCount() {
+  const text = document.getElementById("wc-input").value;
+  const trimmed = text.trim();
+  const words = trimmed === "" ? 0 : trimmed.split(/\s+/).length;
+  const chars = text.length;
+  const charsNoSpaces = text.replace(/\s/g, "").length;
+  const sentences = trimmed === "" ? 0 : (trimmed.match(/[.!?]+(\s|$)/g) || []).length || (trimmed ? 1 : 0);
+  const readingMins = Math.max(1, Math.ceil(words / 200));
+
+  document.getElementById("wc-words").textContent = words;
+  document.getElementById("wc-chars").textContent = chars;
+  document.getElementById("wc-chars-ns").textContent = charsNoSpaces;
+  document.getElementById("wc-sentences").textContent = sentences;
+  document.getElementById("wc-reading").textContent = words === 0 ? "—" : readingMins + " min";
+}
+
+/* ---------- 7. Password generator ---------- */
+function genPassword() {
+  const length = parseInt(document.getElementById("pw-length").value) || 16;
+  const useUpper = document.getElementById("pw-upper").checked;
+  const useLower = document.getElementById("pw-lower").checked;
+  const useNumbers = document.getElementById("pw-numbers").checked;
+  const useSymbols = document.getElementById("pw-symbols").checked;
+
+  const sets = [];
+  if (useUpper) sets.push("ABCDEFGHJKLMNPQRSTUVWXYZ");
+  if (useLower) sets.push("abcdefghijkmnpqrstuvwxyz");
+  if (useNumbers) sets.push("23456789");
+  if (useSymbols) sets.push("!@#$%^&*()-_=+?");
+
+  const out = document.getElementById("pw-output");
+  if (sets.length === 0) {
+    out.textContent = "Pick at least one character type";
+    return;
+  }
+
+  const all = sets.join("");
+  const cryptoObj = window.crypto || window.msCrypto;
+  const randomInts = new Uint32Array(length);
+  cryptoObj.getRandomValues(randomInts);
+
+  let password = "";
+  // guarantee at least one char from each selected set
+  sets.forEach((set, i) => {
+    password += set[randomInts[i] % set.length];
+  });
+  for (let i = sets.length; i < length; i++) {
+    password += all[randomInts[i] % all.length];
+  }
+  // shuffle
+  password = password
+    .split("")
+    .sort(() => 0.5 - Math.random())
+    .join("")
+    .slice(0, length);
+
+  out.textContent = password;
+}
+
+function copyPassword() {
+  const text = document.getElementById("pw-output").textContent;
+  if (!text || text.startsWith("Pick")) return;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById("pw-copy-btn");
+    const original = btn.textContent;
+    btn.textContent = "Copied";
+    setTimeout(() => (btn.textContent = original), 1200);
+  });
+}
+
+function updatePwLengthLabel() {
+  document.getElementById("pw-length-value").textContent = document.getElementById("pw-length").value;
+  genPassword();
+}
+
+/* ---------- init ---------- */
+document.addEventListener("DOMContentLoaded", () => {
+  calcTip();
+  calcPercentOf();
+  calcPercentChange();
+  calcBmi();
+  populateUnitOptions();
+  calcAge();
+  calcWordCount();
+  genPassword();
+
+  const year = document.getElementById("year");
+  if (year) year.textContent = new Date().getFullYear();
+});
+
+</script>
+</body>
+</html>
